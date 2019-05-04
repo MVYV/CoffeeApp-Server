@@ -32,11 +32,19 @@ public class UserService {
     return Optional.ofNullable(userRepository.findByEmail(email));
   }
 
-  public User save(User user) {
+  public User save(User user) throws Exception {
+    validateBeforeSave(user);
     return userRepository.save(user);
   }
 
   public void delete(Long id) {
     userRepository.deleteById(id);
+  }
+
+  private void validateBeforeSave(User user) throws Exception {
+    Optional<User> userOptional = getByEmail(user.getEmail());
+    if (userOptional.isPresent()) {
+      throw new Exception("User with this email is already exist");
+    }
   }
 }
