@@ -34,7 +34,7 @@ public class UserController {
 
   @GetMapping("/")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity<List<User>> getAll(){
+  public ResponseEntity<List<User>> getAll() {
     return ResponseEntity.ok(userService.getAll());
   }
 
