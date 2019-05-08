@@ -1,11 +1,13 @@
 package com.mvyv.march11webapp.service;
 
+import com.mvyv.march11webapp.domain.Role;
 import com.mvyv.march11webapp.domain.User;
 import com.mvyv.march11webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +35,13 @@ public class UserService {
   }
 
   public User save(User user) throws Exception {
+    user.setActive(1);
+    Role role = new Role();
+    role.setRole("USER");
+    List<Role> roles = new ArrayList<>();
+    roles.add(role);
+    user.setRoles(roles);
+//    user.setRole(role);
     validateBeforeSave(user);
     return userRepository.save(user);
   }

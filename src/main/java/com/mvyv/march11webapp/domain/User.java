@@ -46,9 +46,9 @@ public class User {
   @Column(name = "active")
   private Integer active;
 
-//  @ManyToMany(cascade = CascadeType.ALL)
+//  @ManyToOne(fetch = FetchType.LAZY)
 //  @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-//  private List<Role> roles;
+//  private Role role;
 
   @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
   @JoinTable(name="user_role",joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
