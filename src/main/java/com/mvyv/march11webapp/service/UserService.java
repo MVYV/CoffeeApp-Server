@@ -51,10 +51,12 @@ public class UserService {
   }
 
   private void validateBeforeSave(User user) throws Exception {
-    Optional<User> userOptional = getByEmail(user.getEmail());
-    if (userOptional.isPresent()) {
-      if (!"testuserswebapp@gmail.com".equals(user.getEmail()))
-      throw new Exception("User with this email is already exist");
+    // TODO: delete test email check
+    if (!"testuserswebapp@gmail.com".equals(user.getEmail())) {
+      Optional<User> userOptional = getByEmail(user.getEmail());
+      if (userOptional.isPresent()) {
+        throw new Exception("User with this email is already exist");
+      }
     }
   }
 }
