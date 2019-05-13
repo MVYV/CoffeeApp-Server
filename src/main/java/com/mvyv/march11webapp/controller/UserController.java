@@ -54,6 +54,25 @@ public class UserController {
     return ResponseEntity.ok(userService.save(user));
   }
 
+  @PutMapping("/{id}")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) throws Exception {
+    Optional<User> optionalUser = userService.getById(id);
+    if (optionalUser.isPresent()) {
+      User found = optionalUser.get();
+      merge(found, user);
+      return ResponseEntity.ok(userService.save(found));
+    }
+    return ResponseEntity.notFound().build();
+  }
+
+  @DeleteMapping("/{id}")
+  @CrossOrigin(origins = "http://localhost:4200")
+  public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    userService.delete(id);
+    return ResponseEntity.noContent().build();
+  }
+
   @GetMapping("/sendMail")
   public ResponseEntity<Void> sendMail() throws Exception {
     try {
@@ -70,5 +89,15 @@ public class UserController {
     }
 
     return ResponseEntity.noContent().build();
+  }
+
+
+  private void merge(User dbUser, User update) {
+    dbUser.setName(update.getName());
+    dbUser.setPassword(update.getPassword());
+    dbUser.setLastName(update.getLastName());
+    dbUser.setEmail(update.getEmail());
+    dbUser.setRoles(update.getRoles());
+    dbUser.setActive(update.getActive());
   }
 }
