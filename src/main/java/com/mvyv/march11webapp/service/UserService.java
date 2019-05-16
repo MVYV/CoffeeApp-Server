@@ -44,7 +44,7 @@ public class UserService {
     roles.add(role);
     user.setRoles(roles);
     // TODO: delete if which used for test email address
-    if (user.getId() != null) validateBeforeSave(user);
+    if (user.getId() == null) validateBeforeSave(user);
     return userRepository.save(user);
   }
 
