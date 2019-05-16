@@ -4,6 +4,7 @@ import com.mvyv.march11webapp.domain.Role;
 import com.mvyv.march11webapp.domain.User;
 import com.mvyv.march11webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,19 +36,24 @@ public class UserService {
   }
 
   public User save(User user) throws Exception {
-    user.setActive(1);
+    user.setPassword(hashPassword(user.getPassword()));
+    user.setActive((byte)1);
     Role role = new Role();
     role.setRole("USER");
     List<Role> roles = new ArrayList<>();
     roles.add(role);
     user.setRoles(roles);
-//    user.setRole(role);
-    validateBeforeSave(user);
+    // TODO: delete if which used for test email address
+    if (user.getId() != null) validateBeforeSave(user);
     return userRepository.save(user);
   }
 
   public void delete(Long id) {
     userRepository.deleteById(id);
+  }
+
+  private String hashPassword(String plainTextPassword){
+    return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
   }
 
   private void validateBeforeSave(User user) throws Exception {

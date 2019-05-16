@@ -44,14 +44,10 @@ public class User {
   private String lastName;
 
   @Column(name = "active")
-  private Integer active;
+  private Byte active;
 
-//  @ManyToOne(fetch = FetchType.LAZY)
-//  @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-//  private Role role;
-
-  @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-  @JoinTable(name="user_role",joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinTable(name="user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private List<Role> roles;
 
 }
