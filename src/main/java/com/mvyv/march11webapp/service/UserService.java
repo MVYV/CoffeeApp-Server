@@ -43,8 +43,7 @@ public class UserService {
     List<Role> roles = new ArrayList<>();
     roles.add(role);
     user.setRoles(roles);
-    // TODO: delete if which used for test email address
-    if (user.getId() == null) validateBeforeSave(user);
+    validateBeforeSave(user);
     return userRepository.save(user);
   }
 
@@ -61,6 +60,7 @@ public class UserService {
     if (!"testuserswebapp@gmail.com".equals(user.getEmail())) {
       Optional<User> userOptional = getByEmail(user.getEmail());
       if (userOptional.isPresent()) {
+        if (!user.getId().equals(userOptional.get().getId()))
         throw new Exception("User with this email is already exist");
       }
     }
