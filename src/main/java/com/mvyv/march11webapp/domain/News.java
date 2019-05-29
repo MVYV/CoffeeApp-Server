@@ -12,20 +12,20 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
-//@Table(name = "NEWS")
+@Table(name = "NEWS")
 public class News {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-//  @Column(name = "news_id", unique = true)
+  @Column(name = "news_id", unique = true)
   private Long id;
 
-//  @Column(name = "title")
+  @Column(name = "title")
   private String title;
 
-//  @Column(name = "text")
+  @Column(name = "text")
   private String text;
 
-//  @Column(name = "sub_text")
+  @Column(name = "sub_text")
   private String subText;
 }
