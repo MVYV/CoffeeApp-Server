@@ -45,7 +45,7 @@ public class NewsController {
     if (optionalNews.isPresent()) {
       News found = optionalNews.get();
       merge(found, news);
-      return ResponseEntity.ok(newsService.save());
+      return ResponseEntity.ok(newsService.save(found));
     }
     return ResponseEntity.notFound().build();
   }
