@@ -21,11 +21,11 @@ public class News {
   private Long id;
 
   @Column(name = "title")
-  private String title;
+  private String newsTitle;
 
   @Column(name = "text")
-  private String text;
+  private String newsText;
 
   @Column(name = "sub_text")
-  private String subText;
+  private String newsSubText;
 }

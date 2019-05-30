@@ -93,11 +93,11 @@ public class UserController {
 
 
   private void merge(User dbUser, User update) {
-    dbUser.setName(update.getName());
+    dbUser.setUserName(update.getUserName());
     dbUser.setPassword(update.getPassword());
     dbUser.setLastName(update.getLastName());
     dbUser.setEmail(update.getEmail());
     dbUser.setRoles(update.getRoles());
-    dbUser.setActive(update.getActive());
+    dbUser.setIsActive(update.getIsActive());
   }
 }

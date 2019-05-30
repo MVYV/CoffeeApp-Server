@@ -20,9 +20,9 @@ public class User {
     id = user.getId();
     email = user.getEmail();
     password = user.getPassword();
-    name = user.getName();
+    userName = user.getUserName();
     lastName = user.getLastName();
-    active = user.getActive();
+    isActive = user.getIsActive();
     roles = user.getRoles();
   }
 
@@ -38,13 +38,13 @@ public class User {
   private String password;
 
   @Column(name = "name")
-  private String name;
+  private String userName;
 
   @Column(name = "last_name")
   private String lastName;
 
   @Column(name = "active")
-  private Byte active;
+  private Byte isActive;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinTable(name="user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

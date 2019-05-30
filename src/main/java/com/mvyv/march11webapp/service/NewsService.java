@@ -29,7 +29,7 @@ public class NewsService {
   }
 
   public Optional<News> getByTitle(String title) {
-    return Optional.ofNullable(newsRepository.findByTitle(title));
+    return Optional.ofNullable(newsRepository.findByNewsTitle(title));
   }
 
   public News save(News news) {

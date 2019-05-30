@@ -58,8 +58,8 @@ public class NewsController {
 
 
   public void merge(News dbNews, News update) {
-    dbNews.setSubText(update.getSubText());
-    dbNews.setText(update.getText());
-    dbNews.setTitle(update.getTitle());
+    dbNews.setNewsSubText(update.getNewsSubText());
+    dbNews.setNewsText(update.getNewsText());
+    dbNews.setNewsTitle(update.getNewsTitle());
   }
 }
