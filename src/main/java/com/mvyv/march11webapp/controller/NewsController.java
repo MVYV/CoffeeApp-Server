@@ -42,10 +42,10 @@ public class NewsController {
     return ResponseEntity.ok(newsService.save(news));
   }
 
-  @PutMapping("/id")
+  @PutMapping("/{id}")
   @CrossOrigin(origins = "http://localhost:4200")
-  public ResponseEntity<News> updateNews(@RequestBody News news) {
-    Optional<News> optionalNews = newsService.getById(news.getId());
+  public ResponseEntity<News> updateNews(@PathVariable Long id, @RequestBody News news) {
+    Optional<News> optionalNews = newsService.getById(id);
     if (optionalNews.isPresent()) {
       News found = optionalNews.get();
       merge(found, news);
