@@ -1,5 +1,6 @@
 package com.mvyv.march11webapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @Table(name = "NEWS")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class News implements Serializable {
 
   @Id
