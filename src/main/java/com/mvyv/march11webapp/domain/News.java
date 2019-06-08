@@ -33,5 +33,5 @@ public class News implements Serializable {
   private String newsSubText;
 
   @Column(name = "source")
-  private String source;
+  private String newsSource;
 }
