@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -34,4 +35,7 @@ public class News implements Serializable {
 
   @Column(name = "source")
   private String newsSource;
+
+//  @Column(name = "created_on")
+//  private Date newsDate;
 }
