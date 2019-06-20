@@ -34,7 +34,7 @@ public class NewsService {
   }
 
   public News save(News news) {
-//    news.setNewsDate(new Date());
+    news.setNewsDate(new Date());
     return newsRepository.save(news);
   }
 

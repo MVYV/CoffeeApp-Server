@@ -36,6 +36,6 @@ public class News implements Serializable {
   @Column(name = "source")
   private String newsSource;
 
-//  @Column(name = "created_on")
-//  private Date newsDate;
+  @Column(name = "created_on")
+  private Date newsDate;
 }
