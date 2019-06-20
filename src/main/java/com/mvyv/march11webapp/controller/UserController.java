@@ -74,7 +74,7 @@ public class UserController {
   }
 
   @GetMapping("/sendMail")
-  public ResponseEntity<Void> sendMail() throws Exception {
+  public ResponseEntity<Void> sendMail() {
     try {
       MimeMessage message = mailSender.createMimeMessage();
       MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -88,6 +88,15 @@ public class UserController {
       e.printStackTrace();
     }
 
+    return ResponseEntity.noContent().build();
+  }
+
+  @PatchMapping("/{id}")
+  public ResponseEntity<Void> banUser(@PathVariable("id") Long id) throws Exception {
+    Optional<User> optionalUser = userService.getById(id);
+    if (optionalUser.isPresent()) {
+      userService.banUser(optionalUser.get());
+    }
     return ResponseEntity.noContent().build();
   }
 
