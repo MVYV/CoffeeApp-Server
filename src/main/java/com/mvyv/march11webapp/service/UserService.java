@@ -37,7 +37,9 @@ public class UserService {
 
   public User save(User user) throws Exception {
     user.setPassword(hashPassword(user.getPassword()));
-    user.setIsActive((byte)1);
+    if (user.getId() == null) {
+      user.setIsActive((byte)1);
+    }
     Role role = new Role();
     role.setRole("USER");
     List<Role> roles = new ArrayList<>();
@@ -67,7 +69,7 @@ public class UserService {
   }
 
   public void banUser(User user) throws Exception {
-    if (user.getIsActive() == (byte) 1) {
+    if (user.getIsActive() == 1) {
       user.setIsActive((byte) 0);
     } else {
       user.setIsActive((byte) 1);

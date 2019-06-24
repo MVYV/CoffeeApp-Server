@@ -28,8 +28,12 @@ public class UserController {
   }
 
   @GetMapping("/getAll")
-  public ResponseEntity<List<String>> getAllItems() {
+  public ResponseEntity<List<String>> getAllItems() throws Exception {
     List<String> list = Arrays.asList("1", "2", "3");
+    Optional<User> optionalUser = userService.getById(3L);
+    if (optionalUser.isPresent()) {
+      userService.banUser(optionalUser.get());
+    }
     return ResponseEntity.ok(list);
   }
 
