@@ -67,7 +67,7 @@ public class UserService {
   }
 
   public void banUser(User user) throws Exception {
-    if (user.getIsActive() == 1) {
+    if (user.getIsActive() == (byte) 1) {
       user.setIsActive((byte) 0);
     } else {
       user.setIsActive((byte) 1);
