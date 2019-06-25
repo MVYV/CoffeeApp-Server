@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.Arrays;
 import java.util.List;
@@ -27,8 +28,12 @@ public class UserController {
   }
 
   @GetMapping("/getAll")
-  public ResponseEntity<List<String>> getAllItems() {
+  public ResponseEntity<List<String>> getAllItems() throws Exception {
     List<String> list = Arrays.asList("1", "2", "3");
+    Optional<User> optionalUser = userService.getById(3L);
+    if (optionalUser.isPresent()) {
+      userService.banUser(optionalUser.get());
+    }
     return ResponseEntity.ok(list);
   }
 
@@ -79,12 +84,12 @@ public class UserController {
       MimeMessage message = mailSender.createMimeMessage();
       MimeMessageHelper helper = new MimeMessageHelper(message);
 
-      helper.setTo("mishavalkiv@gmail.com");
+      helper.setTo("yuriyvalkiv@yahoo.com");
       helper.setText("How are you?");
       helper.setSubject("Hi");
 
       mailSender.send(message);
-    } catch (Exception e) {
+    } catch (MessagingException e) {
       e.printStackTrace();
     }
 
@@ -92,6 +97,7 @@ public class UserController {
   }
 
   @PatchMapping("/{id}")
+  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<Void> banUser(@PathVariable("id") Long id) throws Exception {
     Optional<User> optionalUser = userService.getById(id);
     if (optionalUser.isPresent()) {
