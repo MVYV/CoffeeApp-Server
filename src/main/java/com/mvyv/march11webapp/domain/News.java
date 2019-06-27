@@ -41,4 +41,7 @@ public class News implements Serializable {
 
   @Column(name = "modified_on")
   private Date newsModificationDate;
+
+  //  @Column(name = "image")
+  private String newsImage;
 }

@@ -69,5 +69,6 @@ public class NewsController {
     dbNews.setNewsSource(update.getNewsSource());
     dbNews.setNewsDate(update.getNewsDate());
     dbNews.setNewsModificationDate(update.getNewsModificationDate());
+//    dbNews.setNewsImage(update.getNewsImage());
   }
 }
