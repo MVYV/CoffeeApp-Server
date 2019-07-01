@@ -115,5 +115,7 @@ public class UserController {
     dbUser.setRoles(update.getRoles());
     dbUser.setIsActive(update.getIsActive());
     dbUser.setAvatar(update.getAvatar());
+    dbUser.setCountry(update.getCountry());
+    dbUser.setCity(update.getCity());
   }
 }

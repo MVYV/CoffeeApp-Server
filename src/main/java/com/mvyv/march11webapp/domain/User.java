@@ -26,6 +26,8 @@ public class User implements Serializable {
     isActive = user.getIsActive();
     roles = user.getRoles();
     avatar = user.getAvatar();
+    country = user.getCountry();
+    city = user.getCity();
   }
 
   @Id
@@ -50,6 +52,12 @@ public class User implements Serializable {
 
   @Column(name = "avatar")
   private String avatar;
+
+  @Column(name = "country")
+  private String country;
+
+  @Column(name = "city")
+  private String city;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinTable(name="user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
