@@ -22,7 +22,7 @@ public class NewsService {
   }
 
   public List<News> getAll() {
-    return newsRepository.findAll();
+    return newsRepository.findAllByOrderByNewsDate();
   }
 
   public Optional<News> getById(Long id) {
