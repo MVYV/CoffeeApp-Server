@@ -23,10 +23,10 @@ public class Product implements Serializable {
   private Long id;
 
   @Column(name = "name")
-  private String name;
+  private String productName;
 
   @Column(name = "type")
-  private String type;
+  private String productType;
 
   @Column(name = "image")
   private String image;

@@ -63,8 +63,8 @@ public class ProductController {
 
 
   private void merge(Product dbProduct, Product update) {
-    dbProduct.setName(update.getName());
-    dbProduct.setType(update.getType());
+    dbProduct.setProductName(update.getProductName());
+    dbProduct.setProductType(update.getProductType());
     dbProduct.setImage(update.getImage());
     dbProduct.setDescription(update.getDescription());
     dbProduct.setProductDate(update.getProductDate());
