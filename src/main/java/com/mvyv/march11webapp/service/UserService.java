@@ -4,10 +4,14 @@ import com.mvyv.march11webapp.domain.Role;
 import com.mvyv.march11webapp.domain.User;
 import com.mvyv.march11webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,10 +21,12 @@ import java.util.Optional;
 public class UserService {
 
   private final UserRepository userRepository;
+  private final JavaMailSender mailSender;
 
   @Autowired
-  public UserService(UserRepository userRepository) {
+  public UserService(UserRepository userRepository, JavaMailSender mailSender) {
     this.userRepository = userRepository;
+    this.mailSender = mailSender;
   }
 
   public List<User> getAll() {
@@ -75,5 +81,16 @@ public class UserService {
       user.setIsActive((byte) 1);
     }
     save(user);
+  }
+
+  public void sendEmail(String to, String subject, String text) throws MessagingException {
+    MimeMessage message = mailSender.createMimeMessage();
+    MimeMessageHelper helper = new MimeMessageHelper(message);
+
+    helper.setTo("yuriyvalkiv@yahoo.com");
+    helper.setText("How are you?");
+    helper.setSubject("Hi");
+
+    mailSender.send(message);
   }
 }

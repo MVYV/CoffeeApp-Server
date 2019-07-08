@@ -79,19 +79,20 @@ public class UserController {
   }
 
   @GetMapping("/sendMail")
-  public ResponseEntity<Void> sendMail() {
-    try {
-      MimeMessage message = mailSender.createMimeMessage();
-      MimeMessageHelper helper = new MimeMessageHelper(message);
-
-      helper.setTo("yuriyvalkiv@yahoo.com");
-      helper.setText("How are you?");
-      helper.setSubject("Hi");
-
-      mailSender.send(message);
-    } catch (MessagingException e) {
-      e.printStackTrace();
-    }
+  public ResponseEntity<Void> sendMail() throws MessagingException {
+//    try {
+//      MimeMessage message = mailSender.createMimeMessage();
+//      MimeMessageHelper helper = new MimeMessageHelper(message);
+//
+//      helper.setTo("yuriyvalkiv@yahoo.com");
+//      helper.setText("How are you?");
+//      helper.setSubject("Hi");
+//
+//      mailSender.send(message);
+//    } catch (MessagingException e) {
+//      e.printStackTrace();
+//    }
+    userService.sendEmail("yuriyvalkiv@yahoo.com", "Hi", "How are you");
 
     return ResponseEntity.noContent().build();
   }
