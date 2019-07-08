@@ -1,6 +1,7 @@
 package com.mvyv.march11webapp.controller;
 
 import com.mvyv.march11webapp.domain.User;
+import com.mvyv.march11webapp.dto.MailDTO;
 import com.mvyv.march11webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -74,8 +75,8 @@ public class UserController {
   }
 
   @GetMapping("/sendMail")
-  public ResponseEntity<Void> sendMail() throws MessagingException {
-    userService.sendEmail("yuriyvalkiv@yahoo.com", "Hi", "How are you");
+  public ResponseEntity<Void> sendMail(@RequestBody MailDTO mailDTO) throws MessagingException {
+    userService.sendEmail(mailDTO.getMailTo(), mailDTO.getMailSubject(), mailDTO.getMailText());
     return ResponseEntity.noContent().build();
   }
 
