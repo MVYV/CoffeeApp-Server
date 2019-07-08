@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,6 +29,8 @@ public class User implements Serializable {
     avatar = user.getAvatar();
     country = user.getCountry();
     city = user.getCity();
+    dateOfBirth = user.getDateOfBirth();
+    gender = user.getGender();
   }
 
   @Id
@@ -58,6 +61,12 @@ public class User implements Serializable {
 
   @Column(name = "city")
   private String city;
+
+  @Column(name = "birth")
+  private Date dateOfBirth;
+
+  @Column(name = "gender")
+  private String gender;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinTable(name="user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
