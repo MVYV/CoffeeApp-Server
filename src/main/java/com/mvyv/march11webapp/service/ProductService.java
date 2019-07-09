@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,8 @@ public class ProductService {
   }
 
   public Product save(Product product) {
+    if (product.getId() == null) product.setProductDate(new Date());
+    else product.setProductModificationDate(new Date());
     return productRepository.save(product);
   }
 

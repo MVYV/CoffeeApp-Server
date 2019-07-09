@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MailDTO {
-  String mailTo;
-  String mailText;
-  String mailSubject;
+  private String mailTo;
+  private String mailText;
+  private String mailSubject;
 }
