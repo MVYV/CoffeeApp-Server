@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
   private final UserService userService;
@@ -34,13 +35,11 @@ public class UserController {
   }
 
   @GetMapping("/")
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<List<User>> getAll() {
     return ResponseEntity.ok(userService.getAll());
   }
 
   @GetMapping("/{id}")
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<User> getById(@PathVariable("id") Long id) {
     Optional<User> userOptional = userService.getById(id);
     if (userOptional.isPresent()) {
@@ -50,13 +49,11 @@ public class UserController {
   }
 
   @PostMapping
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<User> addNewUser(@RequestBody User user) throws Exception {
     return ResponseEntity.ok(userService.save(user));
   }
 
   @PutMapping("/{id}")
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) throws Exception {
     Optional<User> optionalUser = userService.getById(id);
     if (optionalUser.isPresent()) {
@@ -68,7 +65,6 @@ public class UserController {
   }
 
   @DeleteMapping("/{id}")
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
     userService.delete(id);
     return ResponseEntity.noContent().build();
@@ -81,7 +77,6 @@ public class UserController {
   }
 
   @PatchMapping("/{id}")
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<Void> banUser(@PathVariable("id") Long id) throws Exception {
     Optional<User> optionalUser = userService.getById(id);
     if (optionalUser.isPresent()) {
