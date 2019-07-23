@@ -86,8 +86,9 @@ public class UserController {
   }
 
   @GetMapping("/login")
-  public ResponseEntity<User> loginUser(@RequestHeader String user) {
-    String [] email = user.split(":");
+  public ResponseEntity<User> loginUser(@RequestHeader RequestHeader user) {
+    String a = user.value();
+    String [] email = a.split(":");
     Optional<User> userOptional = userService.getByEmail(email[0]);
     if (userOptional.isPresent()) {
       return ResponseEntity.ok(userOptional.get());
