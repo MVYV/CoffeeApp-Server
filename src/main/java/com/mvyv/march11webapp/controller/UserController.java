@@ -85,6 +85,15 @@ public class UserController {
     return ResponseEntity.noContent().build();
   }
 
+  @GetMapping("/login")
+  public ResponseEntity<User> loginUser(@RequestBody User user) {
+    Optional<User> userOptional = userService.getByEmail(user.getEmail());
+    if (userOptional.isPresent()) {
+      return ResponseEntity.ok(userOptional.get());
+    }
+    return ResponseEntity.notFound().build();
+  }
+
 
   private void merge(User dbUser, User update) {
     dbUser.setUserName(update.getUserName());
