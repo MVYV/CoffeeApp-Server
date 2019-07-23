@@ -4,6 +4,7 @@ import com.mvyv.march11webapp.domain.User;
 import com.mvyv.march11webapp.dto.MailDTO;
 import com.mvyv.march11webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,9 +87,10 @@ public class UserController {
   }
 
   @GetMapping("/login")
-  public ResponseEntity<User> loginUser(@RequestHeader("username") String username) {
+  public ResponseEntity<User> loginUser(@RequestHeader HttpHeaders headers) {
 //    String [] email = user.split(":");
-    Optional<User> userOptional = userService.getByEmail(username);
+    List<String> head = headers.get("username");
+    Optional<User> userOptional = userService.getByEmail(head.get(0));
     if (userOptional.isPresent()) {
       return ResponseEntity.ok(userOptional.get());
     }
