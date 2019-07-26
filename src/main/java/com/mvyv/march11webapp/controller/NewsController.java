@@ -21,13 +21,11 @@ public class NewsController {
   }
 
   @GetMapping
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<List<News>> getAllNews() {
     return ResponseEntity.ok(newsService.getAll());
   }
 
   @GetMapping("/{id}")
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<News> getNewsById(@PathVariable("id") Long id) {
     Optional<News> optionalNews = newsService.getById(id);
     if (optionalNews.isPresent()) {
@@ -37,13 +35,11 @@ public class NewsController {
   }
 
   @PostMapping
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<News> addNewNews(@RequestBody News news) {
     return ResponseEntity.ok(newsService.save(news));
   }
 
   @PutMapping("/{id}")
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<News> updateNews(@PathVariable Long id, @RequestBody News news) {
     Optional<News> optionalNews = newsService.getById(id);
     if (optionalNews.isPresent()) {
@@ -55,7 +51,6 @@ public class NewsController {
   }
 
   @DeleteMapping("/{id}")
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<Void> deleteNews(@PathVariable("id") Long id) {
     newsService.delete(id);
     return ResponseEntity.noContent().build();

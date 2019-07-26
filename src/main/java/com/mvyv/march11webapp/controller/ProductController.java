@@ -21,13 +21,11 @@ public class ProductController {
   }
 
   @GetMapping
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<List<Product>> getAllProducts() {
     return ResponseEntity.ok(productService.getAll());
   }
 
   @GetMapping("/{id}")
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
     Optional<Product> optionalProduct = productService.getById(id);
     if (optionalProduct.isPresent()) {
@@ -37,13 +35,11 @@ public class ProductController {
   }
 
   @PostMapping
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<Product> addNewProduct(@RequestBody Product product) {
     return ResponseEntity.ok(productService.save(product));
   }
 
   @PutMapping("/{id}")
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
     Optional<Product> optionalProduct = productService.getById(id);
     if (optionalProduct.isPresent()) {
@@ -55,7 +51,6 @@ public class ProductController {
   }
 
   @DeleteMapping("/{id}")
-  @CrossOrigin(origins = "http://localhost:4200")
   public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id) {
     productService.delete(id);
     return ResponseEntity.noContent().build();
