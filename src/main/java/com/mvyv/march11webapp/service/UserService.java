@@ -69,7 +69,7 @@ public class UserService {
       Optional<User> userOptional = getByEmail(user.getEmail());
       if (userOptional.isPresent()) {
         if (!user.getId().equals(userOptional.get().getId()))
-        throw new Exception("User with this email is already exist");
+        throw new Exception("User with this email: " + user.getEmail() + " is already exist");
       }
     }
   }
