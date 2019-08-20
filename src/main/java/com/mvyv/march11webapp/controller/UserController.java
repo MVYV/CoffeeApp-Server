@@ -71,7 +71,7 @@ public class UserController {
     return ResponseEntity.noContent().build();
   }
 
-  @GetMapping("/sendMail")
+  @PostMapping("/sendMail")
   public ResponseEntity<Void> sendMail(@RequestBody MailDTO mailDTO) throws MessagingException {
     userService.sendEmail(mailDTO.getMailTo(), mailDTO.getMailSubject(), mailDTO.getMailText());
     return ResponseEntity.noContent().build();

@@ -43,12 +43,12 @@ public class UserService {
 
   public User save(User user) throws Exception {
     user.setPassword(hashPassword(user.getPassword()));
+    Role role = new Role();
+    List<Role> roles = new ArrayList<>();
     if (user.getId() == null) {
       user.setIsActive((byte)1);
+      role.setRole("USER");
     }
-    Role role = new Role();
-    role.setRole("USER");
-    List<Role> roles = new ArrayList<>();
     roles.add(role);
     user.setRoles(roles);
     validateBeforeSave(user);
