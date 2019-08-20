@@ -87,9 +87,9 @@ public class UserService {
     MimeMessage message = mailSender.createMimeMessage();
     MimeMessageHelper helper = new MimeMessageHelper(message);
 
-    helper.setTo("yuriyvalkiv@yahoo.com");
-    helper.setText("How are you?");
-    helper.setSubject("Hi");
+    helper.setTo(to);
+    helper.setText(text);
+    helper.setSubject(subject);
 
     mailSender.send(message);
   }
