@@ -49,7 +49,7 @@ public class UserService {
       user.setIsActive((byte)1);
       role.setRole("USER");
     }
-    roles.add(role);
+    roles.add(user.getRoles().get(0));
     user.setRoles(roles);
     validateBeforeSave(user);
     return userRepository.save(user);
