@@ -5,6 +5,7 @@ import com.mvyv.march11webapp.dto.MailDTO;
 import com.mvyv.march11webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/")
-//@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
   private final UserService userService;
@@ -86,15 +86,9 @@ public class UserController {
     return ResponseEntity.noContent().build();
   }
 
-  @GetMapping("/login")
+  @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<User> loginUser(@RequestHeader HttpHeaders headers) {
-//    String [] email = user.split(":");
-    List<String> head = headers.get("username");
-    Optional<User> userOptional = userService.getByEmail(head.get(0));
-    if (userOptional.isPresent()) {
-      return ResponseEntity.ok(userOptional.get());
-    }
-    return ResponseEntity.notFound().build();
+    return ResponseEntity.ok(new User());
   }
 
 
