@@ -48,8 +48,11 @@ public class UserService {
     if (user.getId() == null) {
       user.setIsActive((byte)1);
       role.setRole("USER");
+      roles.add(role);
     }
-    roles.add(user.getRoles().get(0));
+    if (user.getRoles().size() != 0 ) {
+      roles.addAll(user.getRoles());
+    }
     user.setRoles(roles);
     validateBeforeSave(user);
     return userRepository.save(user);
