@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 18, 2019 at 06:03 PM
+-- Generation Time: Aug 24, 2019 at 03:50 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -21,6 +21,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `march_eleven`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `text` varchar(500) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -80,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `name` varchar(30) NOT NULL,
   `type` varchar(30) NOT NULL,
   `image` varchar(256) DEFAULT NULL,
-  `description` varchar(256) NOT NULL,
+  `description` text NOT NULL,
   `price` double NOT NULL,
   `created_on` timestamp NOT NULL,
   `modified_on` timestamp NULL DEFAULT NULL,
@@ -97,6 +112,7 @@ DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `role_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role` varchar(30) NOT NULL,
+  `checked` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`role_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
@@ -104,11 +120,11 @@ CREATE TABLE IF NOT EXISTS `roles` (
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`role_id`, `role`) VALUES
-(1, 'ADMIN'),
-(4, 'ADMIN'),
-(5, 'USER'),
-(6, 'USER');
+INSERT INTO `roles` (`role_id`, `role`, `checked`) VALUES
+(1, 'ADMIN', 0),
+(4, 'ADMIN', 0),
+(5, 'USER', 0),
+(6, 'USER', 0);
 
 -- --------------------------------------------------------
 
