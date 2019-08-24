@@ -22,4 +22,7 @@ public class Role {
 
   @Column(name = "role")
   private String role;
+
+  @Column(name = "checked")
+  private Boolean checked;
 }
