@@ -32,4 +32,7 @@ public class Comment implements Serializable {
   @Column(name = "product_id")
   private Long productId;
 
+  @Column(name = "news_id")
+  private Long newsId;
+
 }

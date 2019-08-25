@@ -26,6 +26,10 @@ public class CommentService {
     return commentRepository.findAllByUserId(userId);
   }
 
+  public List<Comment> getByNewsId(Long newsId) {
+    return commentRepository.findAllByNewsId(newsId);
+  }
+
   public Optional<Comment> getById(Long id) {
     return Optional.ofNullable(commentRepository.getOne(id));
   }

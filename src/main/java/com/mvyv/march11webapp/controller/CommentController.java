@@ -27,7 +27,12 @@ public class CommentController {
 
   @GetMapping("/user/{id}")
   public ResponseEntity<List<Comment>> getCommentsByUserId(@PathVariable("id") Long userId) {
-    return ResponseEntity.ok(commentService.getByProductId(userId));
+    return ResponseEntity.ok(commentService.getByUserId(userId));
+  }
+
+  @GetMapping("/news/{id}")
+  public ResponseEntity<List<Comment>> getCommentsByNewsId(@PathVariable("id") Long newsId) {
+    return ResponseEntity.ok(commentService.getByNewsId(newsId));
   }
 
   @GetMapping("/{id}")
