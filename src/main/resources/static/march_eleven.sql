@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 24, 2019 at 03:50 PM
+-- Generation Time: Aug 25, 2019 at 04:54 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `text` varchar(500) NOT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   `product_id` bigint(20) DEFAULT NULL,
+  `news_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
