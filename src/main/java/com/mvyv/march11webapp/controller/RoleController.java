@@ -1,6 +1,5 @@
 package com.mvyv.march11webapp.controller;
 
-import com.mvyv.march11webapp.domain.Role;
 import com.mvyv.march11webapp.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @RestController
 @RequestMapping("/role")
@@ -22,7 +22,9 @@ public class RoleController {
   }
 
   @GetMapping
-  public ResponseEntity<List<Role>> getAllRoles() {
-    return ResponseEntity.ok(roleService.getAll());
+  public ResponseEntity<Set<String>> getAllRoles() {
+    Set<String> roles = new TreeSet<>();
+    roleService.getAll().forEach(r -> roles.add(r.getRole()));
+    return ResponseEntity.ok(roles);
   }
 }
