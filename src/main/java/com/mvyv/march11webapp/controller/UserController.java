@@ -28,7 +28,7 @@ public class UserController {
   @GetMapping("/getAll")
   public ResponseEntity<List<String>> getAllItems() throws Exception {
     List<String> list = Arrays.asList("1", "2", "3");
-    Optional<User> optionalUser = userService.getById(3L);
+    Optional<User> optionalUser = userService.getById(2L);
     if (optionalUser.isPresent()) {
       userService.banUser(optionalUser.get());
     }
