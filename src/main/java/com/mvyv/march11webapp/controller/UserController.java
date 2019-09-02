@@ -73,7 +73,10 @@ public class UserController {
 
   @PostMapping("/sendMail")
   public ResponseEntity<Void> sendMail(@RequestBody MailDTO mailDTO) throws MessagingException {
-    userService.sendEmail(mailDTO.getMailTo(), mailDTO.getMailSubject(), mailDTO.getMailText());
+    Optional<User> user = userService.getById(mailDTO.getMailTo());
+    if (user.isPresent()) {
+      userService.sendEmail(user.get().getEmail(), mailDTO.getMailSubject(), mailDTO.getMailText());
+    }
     return ResponseEntity.noContent().build();
   }
 
@@ -87,7 +90,7 @@ public class UserController {
   }
 
   @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> loginUser(@RequestHeader HttpHeaders headers) {
+  public ResponseEntity<User> loginUser() {
     return ResponseEntity.ok(new User());
   }
 

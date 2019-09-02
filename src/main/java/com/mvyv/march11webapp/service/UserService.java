@@ -1,6 +1,5 @@
 package com.mvyv.march11webapp.service;
 
-import com.mvyv.march11webapp.domain.Role;
 import com.mvyv.march11webapp.domain.User;
 import com.mvyv.march11webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
