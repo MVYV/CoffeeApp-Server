@@ -36,15 +36,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.addFilterBefore(new CORSFilter(), ChannelProcessingFilter.class);
-    http.csrf().disable();
-    http.authorizeRequests()
-      .antMatchers("**/getAllItems").authenticated()
-      .antMatchers("/getAll").hasAuthority("ROLE_ADMIN")
-      .antMatchers("/login").permitAll()
-      .anyRequest().permitAll()
-      .and().cors()
-      .and().httpBasic();
-//      .and().formLogin().permitAll();
+    http.csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/").permitAll()
+            .antMatchers("/getAll").hasAnyRole("ROLE_ADMIN", "ROLE_USER")
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+//            .loginPage("/login")
+            .permitAll();
   }
 
   @Bean

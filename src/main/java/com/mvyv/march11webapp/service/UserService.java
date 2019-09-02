@@ -44,15 +44,14 @@ public class UserService {
   public User save(User user) throws Exception {
     user.setPassword(hashPassword(user.getPassword()));
     Role role = new Role();
-    List<Role> roles = new ArrayList<>();
-    if (user.getId() == null) {
-      user.setIsActive((byte)1);
-      role.setRole("USER");
-      roles.add(role);
-      user.setRoles(roles);
-    } else {
-      user.setRoles(user.getRoles());
-    }
+//    if (user.getId() == null) {
+//      user.setIsActive((byte)1);
+//      role.setRole("USER");
+//      roles.add(role);
+//      user.setRoles(roles);
+//    } else {
+//      user.setRoles(user.getRoles());
+//    }
     validateBeforeSave(user);
     return userRepository.save(user);
   }
