@@ -2,6 +2,7 @@ package com.mvyv.march11webapp.controller;
 
 import com.mvyv.march11webapp.domain.User;
 import com.mvyv.march11webapp.dto.MailDTO;
+import com.mvyv.march11webapp.dto.UserDTO;
 import com.mvyv.march11webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -43,6 +44,15 @@ public class UserController {
   @GetMapping("/{id}")
   public ResponseEntity<User> getById(@PathVariable("id") Long id) {
     Optional<User> userOptional = userService.getById(id);
+    if (userOptional.isPresent()) {
+      return ResponseEntity.ok(userOptional.get());
+    }
+    return ResponseEntity.notFound().build();
+  }
+
+  @GetMapping("/{email|")
+  public ResponseEntity<User> getByEmail(@PathVariable("email") String email) {
+    Optional<User> userOptional = userService.getByEmail(email);
     if (userOptional.isPresent()) {
       return ResponseEntity.ok(userOptional.get());
     }
@@ -92,6 +102,11 @@ public class UserController {
   @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<User> loginUser() {
     return ResponseEntity.ok(new User());
+  }
+
+
+  private List<UserDTO> map(List<User> userList) {
+    return null;
   }
 
 
