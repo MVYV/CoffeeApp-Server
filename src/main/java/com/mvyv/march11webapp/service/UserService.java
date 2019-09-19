@@ -83,4 +83,14 @@ public class UserService {
 
     mailSender.send(message);
   }
+
+  /*
+  domains.stream().map(this::map).collect(Collectors.toList());
+  import org.modelmapper.ModelMapper;
+
+  ModelMapper mapper = new ModelMapper();
+    mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+    return mapper.map(entity, DTO class here.class);
+   */
 }
