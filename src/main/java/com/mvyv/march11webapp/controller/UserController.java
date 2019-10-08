@@ -5,7 +5,6 @@ import com.mvyv.march11webapp.dto.MailDTO;
 import com.mvyv.march11webapp.dto.UserDTO;
 import com.mvyv.march11webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -107,6 +106,22 @@ public class UserController {
 
   private List<UserDTO> map(List<User> userList) {
     return null;
+  }
+
+  private UserDTO map(User user) {
+    UserDTO dto = new UserDTO();
+    dto.setAvatar(user.getAvatar());
+    dto.setCity(user.getCity());
+    dto.setCountry(user.getCountry());
+    dto.setDateOfBirth(user.getDateOfBirth());
+    dto.setGender(user.getGender());
+    dto.setId(user.getId());
+    dto.setIsActive(user.getIsActive());
+    dto.setLastName(user.getLastName());
+    dto.setRoles(user.getRoles());
+    dto.setUserName(user.getUserName());
+
+    return dto;
   }
 
 

@@ -4,6 +4,7 @@ import com.mvyv.march11webapp.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,11 +21,17 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
+  private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+  private final JwtRequestFilter jwtRequestFilter;
   private final UserDetailsServiceImpl userDetailsService;
 
   @Autowired
-  public SpringSecurityConfig(UserDetailsServiceImpl userDetailsService) {
+  public SpringSecurityConfig(UserDetailsServiceImpl userDetailsService,
+                              JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+                              JwtRequestFilter jwtRequestFilter) {
     this.userDetailsService = userDetailsService;
+    this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+    this.jwtRequestFilter = jwtRequestFilter;
   }
 
   @Override
@@ -62,5 +69,19 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     config.addAllowedMethod(CorsConfiguration.ALL);
     source.registerCorsConfiguration("/**", config);
     return new CorsFilter(source);
+  }
+
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    // configure AuthenticationManager so that it knows from where to load
+    // user for matching credentials
+    // Use BCryptPasswordEncoder
+    auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+  }
+
+  @Bean
+  @Override
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
   }
 }
