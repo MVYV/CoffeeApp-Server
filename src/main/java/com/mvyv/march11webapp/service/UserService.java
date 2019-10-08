@@ -13,6 +13,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -43,6 +44,11 @@ public class UserService {
     user.setPassword(hashPassword(user.getPassword()));
 //    validateBeforeSave(user);
     return userRepository.save(user);
+  }
+
+  public int beforeSave() {
+    Random random = new Random();
+    return Math.abs(random.nextInt());
   }
 
   public void delete(Long id) {

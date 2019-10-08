@@ -98,11 +98,13 @@ public class UserController {
     return ResponseEntity.noContent().build();
   }
 
-  @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> loginUser() {
-    return ResponseEntity.ok(new User());
+  @GetMapping("/check-mail")
+  public ResponseEntity<Integer> checkEmailBeforeSave(@RequestBody MailDTO mailDTO) throws MessagingException {
+    int code = userService.beforeSave();
+    userService.sendEmail(mailDTO.getMailToAddress(), "Confirm registration",
+            "Please enter this code to complete Your registration: " + code);
+    return ResponseEntity.ok(code);
   }
-
 
   private List<UserDTO> map(List<User> userList) {
     return null;
