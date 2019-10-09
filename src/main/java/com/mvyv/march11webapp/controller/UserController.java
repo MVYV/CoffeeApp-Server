@@ -106,6 +106,11 @@ public class UserController {
     return ResponseEntity.ok(code);
   }
 
+  @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<User> loginUser() {
+    return ResponseEntity.ok(new User());
+  }
+
   private List<UserDTO> map(List<User> userList) {
     return null;
   }
