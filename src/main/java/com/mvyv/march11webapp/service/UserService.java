@@ -48,7 +48,7 @@ public class UserService {
 
   public int beforeSave() {
     Random random = new Random();
-    return Math.abs(random.nextInt(6));
+    return Math.abs(random.nextInt(999999));
   }
 
   public void delete(Long id) {
