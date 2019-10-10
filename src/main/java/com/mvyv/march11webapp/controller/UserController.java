@@ -98,7 +98,7 @@ public class UserController {
     return ResponseEntity.noContent().build();
   }
 
-  @GetMapping("/check-mail")
+  @PostMapping("/check-mail")
   public ResponseEntity<Integer> checkEmailBeforeSave(@RequestBody MailDTO mailDTO) throws MessagingException {
     int code = userService.beforeSave();
     userService.sendEmail(mailDTO.getMailToAddress(), "Confirm registration",
