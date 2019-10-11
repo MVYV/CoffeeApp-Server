@@ -62,7 +62,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     httpSecurity.csrf().disable()
             // dont authenticate this particular request
             .authorizeRequests().antMatchers("/authenticate").
-            permitAll().antMatchers("/**")
+            permitAll().antMatchers("/")
             .permitAll().
             // all other requests need to be authenticated
                     anyRequest().authenticated().and().
