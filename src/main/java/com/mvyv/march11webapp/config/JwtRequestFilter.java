@@ -1,6 +1,6 @@
 package com.mvyv.march11webapp.config;
 
-import com.mvyv.march11webapp.service.JwtUserDetailsService;
+import com.mvyv.march11webapp.service.UserDetailsServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
 	@Autowired
-	private JwtUserDetailsService jwtUserDetailsService;
+	private UserDetailsServiceImpl jwtUserDetailsService;
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
