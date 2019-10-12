@@ -5,7 +5,6 @@ import com.mvyv.march11webapp.dto.MailDTO;
 import com.mvyv.march11webapp.dto.UserDTO;
 import com.mvyv.march11webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +34,7 @@ public class UserController {
     return ResponseEntity.ok(list);
   }
 
-  @GetMapping("/")
+  @GetMapping
   public ResponseEntity<List<User>> getAll() {
     return ResponseEntity.ok(userService.getAll());
   }

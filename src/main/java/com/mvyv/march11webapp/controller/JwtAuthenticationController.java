@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Objects;
 
 @RestController
-@CrossOrigin
 public class JwtAuthenticationController {
 
   private final AuthenticationManager authenticationManager;
@@ -32,7 +31,7 @@ public class JwtAuthenticationController {
     this.jwtInMemoryUserDetailsService = jwtInMemoryUserDetailsService;
   }
 
-  @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+  @PostMapping(value = "/authenticate")
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
           throws Exception {
 
