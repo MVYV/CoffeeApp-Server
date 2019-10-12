@@ -4,11 +4,13 @@ import com.mvyv.march11webapp.domain.Comment;
 import com.mvyv.march11webapp.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CommentService {
 
   private final CommentRepository commentRepository;
