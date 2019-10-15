@@ -37,7 +37,7 @@ public class UserService {
   }
 
   public Optional<User> getByEmail(String email) {
-    return Optional.ofNullable(userRepository.findByEmail(email));
+    return Optional.ofNullable(userRepository.findUserByEmail(email));
   }
 
   public User save(User user) throws Exception {
