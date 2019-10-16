@@ -42,6 +42,7 @@ public class UserService {
 
   public User save(User user) throws Exception {
     user.setPassword(hashPassword(user.getPassword()));
+    if (user.getId() == null) user.setIsActive((byte)1);
 //    validateBeforeSave(user);
     return userRepository.save(user);
   }

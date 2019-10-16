@@ -58,7 +58,7 @@ public class UserController {
   }
 
   @PostMapping
-  public ResponseEntity<User> addNewUser(@RequestBody User user) throws Exception {
+  public ResponseEntity<User> addNewUser(@RequestBody User user) throws Exception { ;
     return ResponseEntity.ok(userService.save(user));
   }
 
