@@ -29,6 +29,14 @@ public class ProductService {
     return Optional.ofNullable(productRepository.getOne(id));
   }
 
+  public List<Product> getByProductType(String type) {
+    return productRepository.findAllByProductType(type);
+  }
+
+  public List<Product> getAllByLanguage(String language) {
+    return productRepository.findAllByLanguage(language);
+  }
+
   public Product save(Product product) {
     if (product.getId() == null) product.setProductDate(new Date());
     else product.setProductModificationDate(new Date());

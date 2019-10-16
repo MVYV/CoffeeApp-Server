@@ -43,4 +43,7 @@ public class Product implements Serializable {
   @Column(name = "modified_on")
   private Date productModificationDate;
 
+  @Column(name = "language")
+  private String language;
+
 }

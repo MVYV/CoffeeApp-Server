@@ -25,6 +25,11 @@ public class ProductController {
     return ResponseEntity.ok(productService.getAll());
   }
 
+  @GetMapping("/{lang}")
+  public ResponseEntity<List<Product>> getAllProductsByLanguage(@PathVariable("lang") String language) {
+    return ResponseEntity.ok(productService.getAllByLanguage(language));
+  }
+
   @GetMapping("/{id}")
   public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
     Optional<Product> optionalProduct = productService.getById(id);

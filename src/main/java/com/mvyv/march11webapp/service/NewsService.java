@@ -33,6 +33,10 @@ public class NewsService {
     return Optional.ofNullable(newsRepository.findByNewsTitle(title));
   }
 
+  public List<News> getAllByLanguage(String language) {
+    return newsRepository.findAllByLanguageOrderByNewsDateDesc(language);
+  }
+
   public News save(News news) {
     if (news.getId() == null) news.setNewsDate(new Date());
     else news.setNewsModificationDate(new Date());

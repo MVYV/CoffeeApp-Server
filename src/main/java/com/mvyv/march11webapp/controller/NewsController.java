@@ -25,6 +25,11 @@ public class NewsController {
     return ResponseEntity.ok(newsService.getAll());
   }
 
+  @GetMapping("/{lang}")
+  public ResponseEntity<List<News>> getAllNewsByLanguage(@PathVariable("lang") String language) {
+    return ResponseEntity.ok(newsService.getAllByLanguage(language));
+  }
+
   @GetMapping("/{id}")
   public ResponseEntity<News> getNewsById(@PathVariable("id") Long id) {
     Optional<News> optionalNews = newsService.getById(id);

@@ -44,4 +44,7 @@ public class News implements Serializable {
 
   @Column(name = "image")
   private String newsImage;
+
+  @Column(name = "language")
+  private String language;
 }
