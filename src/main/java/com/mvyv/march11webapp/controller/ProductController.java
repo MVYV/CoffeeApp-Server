@@ -25,7 +25,7 @@ public class ProductController {
     return ResponseEntity.ok(productService.getAll());
   }
 
-  @GetMapping("/{lang}")
+  @GetMapping("/lang/{lang}")
   public ResponseEntity<List<Product>> getAllProductsByLanguage(@PathVariable("lang") String language) {
     return ResponseEntity.ok(productService.getAllByLanguage(language));
   }
