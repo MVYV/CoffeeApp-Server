@@ -25,7 +25,7 @@ public class NewsController {
     return ResponseEntity.ok(newsService.getAll());
   }
 
-  @GetMapping("/{lang}")
+  @GetMapping("/lang/{lang}")
   public ResponseEntity<List<News>> getAllNewsByLanguage(@PathVariable("lang") String language) {
     return ResponseEntity.ok(newsService.getAllByLanguage(language));
   }

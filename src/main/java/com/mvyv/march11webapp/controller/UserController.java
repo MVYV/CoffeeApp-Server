@@ -12,6 +12,7 @@ import javax.mail.MessagingException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/")
@@ -35,15 +36,15 @@ public class UserController {
   }
 
   @GetMapping
-  public ResponseEntity<List<User>> getAll() {
-    return ResponseEntity.ok(userService.getAll());
+  public ResponseEntity<List<UserDTO>> getAll() {
+    return ResponseEntity.ok(map(userService.getAll()));
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<User> getById(@PathVariable("id") Long id) {
+  public ResponseEntity<UserDTO> getById(@PathVariable("id") Long id) {
     Optional<User> userOptional = userService.getById(id);
     if (userOptional.isPresent()) {
-      return ResponseEntity.ok(userOptional.get());
+      return ResponseEntity.ok(map(userOptional.get()));
     }
     return ResponseEntity.notFound().build();
   }
@@ -106,7 +107,7 @@ public class UserController {
   }
 
   private List<UserDTO> map(List<User> userList) {
-    return null;
+    return userList.stream().map(this::map).collect(Collectors.toList());
   }
 
   private UserDTO map(User user) {
