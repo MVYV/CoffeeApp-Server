@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("comment")
+@RequestMapping("/comment")
 public class CommentController {
 
   private final CommentService commentService;
