@@ -40,6 +40,10 @@ public class UserService {
     return Optional.ofNullable(userRepository.findUserByEmail(email));
   }
 
+  public Optional<User> getByUserName(String userName) {
+    return Optional.ofNullable(userRepository.findUserByUserName(userName));
+  }
+
   public User save(User user) throws Exception {
     user.setPassword(hashPassword(user.getPassword()));
     if (user.getId() == null) user.setIsActive((byte)1);
