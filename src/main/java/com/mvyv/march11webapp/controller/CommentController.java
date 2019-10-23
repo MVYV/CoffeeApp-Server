@@ -84,6 +84,7 @@ public class CommentController {
     dto.setNewsId(domain.getNewsId());
     dto.setProductId(domain.getProductId());
     dto.setUserId(domain.getUserId());
+    dto.setCommentDate(domain.getCommentDate());
     Optional<User> user = userService.getById(domain.getUserId());
     user.ifPresent(u -> dto.setFullName(u.getUserName() + " " + u.getLastName()));
 

@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -34,5 +35,8 @@ public class Comment implements Serializable {
 
   @Column(name = "news_id")
   private Long newsId;
+
+  @Column(name = "date")
+  private Date commentDate;
 
 }
