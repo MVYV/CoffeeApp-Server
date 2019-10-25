@@ -70,5 +70,6 @@ public class ProductController {
     dbProduct.setProductDate(update.getProductDate());
     dbProduct.setProductModificationDate(update.getProductModificationDate());
     dbProduct.setPrice(update.getPrice());
+    dbProduct.setLanguage(update.getLanguage());
   }
 }
