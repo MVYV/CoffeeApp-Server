@@ -131,7 +131,6 @@ public class UserController {
 
   private void merge(User dbUser, User update) {
     dbUser.setUserName(update.getUserName());
-    dbUser.setPassword(update.getPassword());
     dbUser.setLastName(update.getLastName());
     if (update.getEmail() != null) dbUser.setEmail(update.getEmail());
     dbUser.setRoles(update.getRoles());
