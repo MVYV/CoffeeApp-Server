@@ -133,7 +133,7 @@ public class UserController {
     dbUser.setUserName(update.getUserName());
     dbUser.setPassword(update.getPassword());
     dbUser.setLastName(update.getLastName());
-    dbUser.setEmail(update.getEmail());
+    if (update.getEmail() != null) dbUser.setEmail(update.getEmail());
     dbUser.setRoles(update.getRoles());
     dbUser.setIsActive(update.getIsActive());
     dbUser.setAvatar(update.getAvatar());
