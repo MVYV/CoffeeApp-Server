@@ -59,6 +59,7 @@ public class UserService {
         role.setRole("USER");
         roles.add(role);
         dbUser.setRoles(roles);
+        return userRepository.save(dbUser);
       }
     }
 //    validateBeforeSave(user);
