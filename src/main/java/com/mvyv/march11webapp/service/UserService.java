@@ -1,5 +1,6 @@
 package com.mvyv.march11webapp.service;
 
+import com.mvyv.march11webapp.domain.Role;
 import com.mvyv.march11webapp.domain.User;
 import com.mvyv.march11webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -46,7 +48,14 @@ public class UserService {
 
   public User save(User user) throws Exception {
     user.setPassword(hashPassword(user.getPassword()));
-    if (user.getId() == null) user.setIsActive((byte)1);
+    if (user.getId() == null) {
+      user.setIsActive((byte)1);
+      List<Role> roles = new ArrayList<>();
+      Role role = new Role();
+      role.setRole("USER");
+      roles.add(role);
+      user.setRoles(roles);
+    }
 //    validateBeforeSave(user);
     return userRepository.save(user);
   }
