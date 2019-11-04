@@ -50,11 +50,16 @@ public class UserService {
     user.setPassword(hashPassword(user.getPassword()));
     if (user.getId() == null) {
       user.setIsActive((byte)1);
-      List<Role> roles = new ArrayList<>();
-      Role role = new Role();
-      role.setRole("USER");
-      roles.add(role);
-      user.setRoles(roles);
+      userRepository.save(user);
+      Optional<User> dbUserOptional = getByEmail(user.getEmail());
+      if (dbUserOptional.isPresent()) {
+        User dbUser = dbUserOptional.get();
+        Role role = new Role();
+        List<Role> roles = new ArrayList<>();
+        role.setRole("USER");
+        roles.add(role);
+        dbUser.setRoles(roles);
+      }
     }
 //    validateBeforeSave(user);
     return userRepository.save(user);
