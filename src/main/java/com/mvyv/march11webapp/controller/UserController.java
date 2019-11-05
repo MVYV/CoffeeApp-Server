@@ -59,8 +59,9 @@ public class UserController {
   }
 
   @PostMapping
-  public ResponseEntity<User> addNewUser(@RequestBody User user) throws Exception { ;
-    return ResponseEntity.ok(userService.save(user));
+  public ResponseEntity<User> addNewUser(@RequestBody User user) throws Exception {
+    userService.save(user);
+    return ResponseEntity.ok(userService.addUserRole(user));
   }
 
   @PutMapping("/{id}")

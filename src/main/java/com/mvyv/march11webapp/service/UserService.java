@@ -48,21 +48,17 @@ public class UserService {
 
   public User save(User user) throws Exception {
     user.setPassword(hashPassword(user.getPassword()));
-    if (user.getId() == null) {
-      user.setIsActive((byte)1);
-      userRepository.save(user);
-      Optional<User> dbUserOptional = getByEmail(user.getEmail());
-      if (dbUserOptional.isPresent()) {
-        User dbUser = dbUserOptional.get();
-        Role role = new Role();
-        List<Role> roles = new ArrayList<>();
-        role.setRole("USER");
-        roles.add(role);
-        dbUser.setRoles(roles);
-        return userRepository.save(dbUser);
-      }
-    }
+    if (user.getId() == null) user.setIsActive((byte)1);
 //    validateBeforeSave(user);
+    return userRepository.save(user);
+  }
+
+  public User addUserRole(User user) {
+    Role role = new Role();
+    List<Role> roles = new ArrayList<>();
+    role.setRole("USER");
+    roles.add(role);
+    user.setRoles(roles);
     return userRepository.save(user);
   }
 
