@@ -2,6 +2,7 @@ package com.mvyv.march11webapp.service;
 
 import com.mvyv.march11webapp.domain.Role;
 import com.mvyv.march11webapp.domain.User;
+import com.mvyv.march11webapp.repository.RoleRepository;
 import com.mvyv.march11webapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,10 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Transactional
@@ -23,11 +21,15 @@ public class UserService {
 
   private final UserRepository userRepository;
   private final JavaMailSender mailSender;
+  private final RoleRepository roleRepository;
 
   @Autowired
-  public UserService(UserRepository userRepository, JavaMailSender mailSender) {
+  public UserService(UserRepository userRepository,
+                     JavaMailSender mailSender,
+                     RoleRepository roleRepository) {
     this.userRepository = userRepository;
     this.mailSender = mailSender;
+    this.roleRepository = roleRepository;
   }
 
   public List<User> getAll() {
@@ -48,17 +50,11 @@ public class UserService {
 
   public User save(User user) throws Exception {
     user.setPassword(hashPassword(user.getPassword()));
-    if (user.getId() == null) user.setIsActive((byte)1);
+    if (user.getId() == null) {
+      user.setIsActive((byte)1);
+      user.setRoles(Collections.singletonList(roleRepository.findByRole("USER")));
+    }
 //    validateBeforeSave(user);
-    return userRepository.save(user);
-  }
-
-  public User addUserRole(User user) {
-    Role role = new Role();
-    List<Role> roles = new ArrayList<>();
-    role.setRole("USER");
-    roles.add(role);
-    user.setRoles(roles);
     return userRepository.save(user);
   }
 
@@ -105,14 +101,4 @@ public class UserService {
 
     mailSender.send(message);
   }
-
-  /*
-  domains.stream().map(this::map).collect(Collectors.toList());
-  import org.modelmapper.ModelMapper;
-
-  ModelMapper mapper = new ModelMapper();
-    mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-
-    return mapper.map(entity, DTO class here.class);
-   */
 }

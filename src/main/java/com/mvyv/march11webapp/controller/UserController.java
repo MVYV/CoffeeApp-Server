@@ -60,8 +60,7 @@ public class UserController {
 
   @PostMapping
   public ResponseEntity<User> addNewUser(@RequestBody User user) throws Exception {
-    userService.save(user);
-    return ResponseEntity.ok(userService.addUserRole(user));
+    return ResponseEntity.ok(userService.save(user));
   }
 
   @PutMapping("/{id}")
