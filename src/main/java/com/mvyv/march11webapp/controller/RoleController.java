@@ -24,17 +24,6 @@ public class RoleController {
 
   @GetMapping
   public ResponseEntity<List<Role>> getAllRoles() {
-    List<Role> roleList = new ArrayList<>();
-    Role user = new Role();
-    user.setId(2);
-    user.setChecked(false);
-    user.setRole("USER");
-    Role admin = new Role();
-    admin.setId(1);
-    admin.setChecked(false);
-    admin.setRole("ADMIN");
-    roleList.add(user);
-    roleList.add(admin);
-    return ResponseEntity.ok(roleList);
+    return ResponseEntity.ok(roleService.getAll());
   }
 }

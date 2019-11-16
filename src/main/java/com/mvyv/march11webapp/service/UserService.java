@@ -49,7 +49,12 @@ public class UserService {
   }
 
   public User save(User user) throws Exception {
-    user.setPassword(hashPassword(user.getPassword()));
+    Optional<User> optionalUser = getById(user.getId());
+    if (optionalUser.isPresent()) {
+      if (!user.getPassword().equals(optionalUser.get().getPassword())) {
+        user.setPassword(hashPassword(user.getPassword()));
+      }
+    }
     if (user.getId() == null) {
       user.setIsActive((byte)1);
       user.setRoles(Collections.singletonList(roleRepository.findByRole("USER")));
