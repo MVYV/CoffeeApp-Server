@@ -22,11 +22,11 @@ public class CommentService {
   }
 
   public List<Comment> getByProductId(Long productId) {
-    return commentRepository.findAllByProductIdOOrderByCommentDate(productId);
+    return commentRepository.findAllByProductIdOrderByCommentDate(productId);
   }
 
   public List<Comment> getByUserId(Long userId) {
-    return commentRepository.findAllByUserIdOOrderByCommentDate(userId);
+    return commentRepository.findAllByUserIdOrderByCommentDate(userId);
   }
 
   public List<Comment> getByNewsId(Long newsId) {
