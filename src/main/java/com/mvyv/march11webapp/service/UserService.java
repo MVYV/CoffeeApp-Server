@@ -54,12 +54,13 @@ public class UserService {
       if (!user.getPassword().equals(optionalUser.get().getPassword())) {
         user.setPassword(hashPassword(user.getPassword()));
       }
+      if (user.getId() != null) user.setRoles(optionalUser.get().getRoles());
     }
     if (user.getId() == null) {
+      validateBeforeSave(user);
       user.setIsActive((byte)1);
       user.setRoles(Collections.singletonList(roleRepository.findByRole("USER")));
     }
-//    validateBeforeSave(user);
     return userRepository.save(user);
   }
 
@@ -72,18 +73,14 @@ public class UserService {
     userRepository.deleteById(id);
   }
 
-  private String hashPassword(String plainTextPassword){
+  public String hashPassword(String plainTextPassword){
     return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
   }
 
   private void validateBeforeSave(User user) throws Exception {
-    // TODO: delete test email check
-    if (!"testuserswebapp@gmail.com".equals(user.getEmail())) {
-      Optional<User> userOptional = getByEmail(user.getEmail());
-      if (userOptional.isPresent()) {
-        if (!user.getId().equals(userOptional.get().getId()))
-        throw new Exception("User with this email: " + user.getEmail() + " is already exist");
-      }
+    Optional<User> userOptional = getByEmail(user.getEmail());
+    if (userOptional.isPresent()) {
+      throw new Exception("User with this email: " + user.getEmail() + " is already exist");
     }
   }
 

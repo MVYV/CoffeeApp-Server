@@ -68,7 +68,7 @@ public class UserController {
     Optional<User> optionalUser = userService.getById(id);
     if (optionalUser.isPresent()) {
       User found = optionalUser.get();
-      if (user.getPassword() != null) found.setPassword(user.getPassword());
+      if (user.getPassword() != null) found.setPassword(userService.hashPassword(user.getPassword()));
       merge(found, user);
       return ResponseEntity.ok(userService.save(found));
     }
@@ -116,7 +116,7 @@ public class UserController {
     dto.setAvatar(user.getAvatar());
     dto.setCity(user.getCity());
     dto.setCountry(user.getCountry());
-
+    dto.setRoles(user.getRoles());
     dto.setDateOfBirth(user.getDateOfBirth());
     dto.setGender(user.getGender());
     dto.setId(user.getId());
