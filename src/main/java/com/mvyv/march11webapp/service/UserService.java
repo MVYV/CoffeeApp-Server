@@ -51,9 +51,6 @@ public class UserService {
   public User save(User user) throws Exception {
     Optional<User> optionalUser = getById(user.getId());
     if (optionalUser.isPresent()) {
-      if (!user.getPassword().equals(optionalUser.get().getPassword())) {
-        user.setPassword(hashPassword(user.getPassword()));
-      }
       if (user.getId() != null) user.setRoles(optionalUser.get().getRoles());
     }
     if (user.getId() == null) {

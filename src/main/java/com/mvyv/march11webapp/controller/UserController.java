@@ -53,7 +53,9 @@ public class UserController {
   public ResponseEntity<User> getByEmail(@PathVariable("email") String email) {
     Optional<User> userOptional = userService.getByEmail(email);
     if (userOptional.isPresent()) {
-      return ResponseEntity.ok(userOptional.get());
+      User user = userOptional.get();
+      user.setPassword("");
+      return ResponseEntity.ok(user);
     }
     return ResponseEntity.notFound().build();
   }
